@@ -36,7 +36,7 @@ def binary_classification_metrics(y_pred, y_true):
     except ZeroDivisionError:
         f1 = 0
     accuracy = (tp + tn) / len(y_true)
-    return (precision, recall, f1, accuracy)
+    return precision, recall, f1, accuracy
     
     pass
 
@@ -54,7 +54,6 @@ def multiclass_accuracy(y_pred, y_true):
     """
     YOUR CODE IS HERE
     """
-    pass
 
 
 def r_squared(y_pred, y_true):
@@ -71,7 +70,9 @@ def r_squared(y_pred, y_true):
     YOUR CODE IS HERE
     """
     try:
-        r_sq = 1 - (np.sum((y_true - y_pred) ** 2) / np.sum(y_true - np.average(y_true)))
+        corr_matrix = np.corrcoef(y_true, y_pred)
+        corr = corr_matrix[0,1]
+        r_sq = corr**2
     except ZeroDivisionError:
         r_sq = 'zero division error'
     return r_sq
